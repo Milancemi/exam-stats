@@ -12,6 +12,8 @@ function validateForm(currentStudent, currentGrade) {
     if (currentGrade < 5 || currentGrade > 10) {
         return false;
     }
+
+    return true;
 }
 
 function collectData(report) {
@@ -68,7 +70,7 @@ function updateList(report) {
     var itemDeleteBtn = document.createElement("button");
     itemDeleteBtn.textContent = "x";
     itemDeleteBtn.classList.add("item-delete-btn");
-    console.log(itemDeleteBtn);
+    //console.log(itemDeleteBtn);
 
     // Append all the created elements to their parrent elements
     itemDelete.appendChild(itemDeleteBtn);
