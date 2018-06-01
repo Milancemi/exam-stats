@@ -59,15 +59,19 @@ var dataController = (function () {
 
         data.total = data.students.passed.length + data.students.failed.length;
 
-        var percentage = (data.totals.passed / data.total) * 100;
-        data.successPercentage = Math.round(percentage);
+        var passedPercentage = (data.totals.passed / data.total) * 100;
+        data.successPercentage = Math.round(passedPercentage);
+
+        var failedPercentage = 100 - passedPercentage;
+        data.failedPercentage = Math.round(failedPercentage);
     }
 
     function getStatistics() {
         return {
             passed: data.totals.passed,
             failed: data.totals.failed,
-            percentage: data.successPercentage,
+            passedPercentage: data.successPercentage,
+            failedPercentage: data.failedPercentage,
             total: data.total
         }
     }
@@ -120,7 +124,8 @@ var UIController = (function () {
         var defaultStats = {
             passed: 0,
             failed: 0,
-            percentage: -1,
+            passedPercentage: "",
+            failedPercentage: "",
             total: 0
         };
 
@@ -130,8 +135,9 @@ var UIController = (function () {
         document.querySelector(DOMSelectors.containerFailedCount).textContent = stats.failed;
         document.querySelector(DOMSelectors.containerTotalCount).textContent = "Total students: " + stats.total;
         //document.querySelector(DOMSelectors.containerTotalCount).textContent = document.querySelector(DOMSelectors.containerTotalCount).textContent.replace('%count%',stats.total);
-        document.querySelector(DOMSelectors.containerPassedPercentage).textContent = stats.percentage + "%";
-        document.querySelector(DOMSelectors.containerFailedPercentage).textContent = 100 - stats.percentage + "%";
+
+        document.querySelector(DOMSelectors.containerPassedPercentage).textContent = stats.passedPercentage + "%";
+        document.querySelector(DOMSelectors.containerFailedPercentage).textContent = stats.failedPercentage + "%";
         //TODO : MAKE DEFAULT VALUES FOR PERCENTAGE
 
     }
